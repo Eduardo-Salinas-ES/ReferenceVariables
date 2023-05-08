@@ -1,44 +1,54 @@
 ﻿//main
 using ReferenceVariables;
 
-
 Elephant lucinda = new Elephant() { EarSize = 33, Name = "Lucinda" };
 Elephant lloyd = new Elephant() { EarSize = 40, Name = "Lloyd" };
 
-Console.WriteLine("Press 1 for Lloyd, 2 for Lucinda, 3 to swap");
+Console.WriteLine("Press 1 for Lloyd, 2 for Lucinda, 3 to swap, 4 improper swap, 5 send message");
 
 while (true)
 {
-    string choice = Console.ReadLine();
+    //string choice = Console.ReadLine();
+    Char choice = Console.ReadKey(true).KeyChar;
+    Console.WriteLine("You pressed " + choice);
 
-    if (choice == "1")
+    if (choice == '1')
     {
-        Console.WriteLine("You pressed 1\nCalling lloyd.WhoAmI");
+        Console.WriteLine("Calling lloyd.WhoAmI");
         lloyd.WhoAmI();
 
     }
-    else if (choice == "2")
+    else if (choice == '2')
     {
-        Console.WriteLine("You pressed 2\nCalling lucinda.WhoAmI");
-        lloyd.WhoAmI();
+        Console.WriteLine("Calling lucinda.WhoAmI");
+        lucinda.WhoAmI();
     }
-    else if (choice == "3")
+    else if (choice == '3')
     {
-        Elephant tempElephant = lucinda;
-        lloyd = tempElephant;
-        lucinda = lloyd;
-     
-        Console.WriteLine("You pressed 3\nReferences have been swapped");
+        Elephant tempElephant;
+        tempElephant = lloyd;
+        lloyd = lucinda;
+        lucinda = tempElephant;
         
+        Console.WriteLine("References have been swapped");
+    }
+    else if(choice == '4')
+    {
+        lloyd = lucinda;
+        lloyd.EarSize = 4321;
+        lloyd.WhoAmI();
+
+    }
+    else if (choice == '5')
+    {
+        lucinda.SpeakTo(lloyd, "Hi, Lloyd");
+
     }
     else
     {
-        Console.WriteLine("Your entry was invalid, press space to try again or enter to quit");
-        string chooseAgain =  Console.ReadLine();
-        if (chooseAgain == "") { return; }
-        else { Console.WriteLine("Press 1 for Lloyd, 2 for Lucinda, 3 to swap"); }
+        return;
 
     }
+    Console.WriteLine();
 }
-
 
